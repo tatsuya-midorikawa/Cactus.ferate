@@ -3,6 +3,7 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Core/Ferate.fs" />
     <Compile Include="WeatherForecast.fs" />
     <Compile Include="Controllers/Ferate.fs" />
     <Compile Include="Controllers/WeatherForecastController.fs" />
