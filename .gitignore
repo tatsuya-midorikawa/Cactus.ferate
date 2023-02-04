@@ -352,3 +352,7 @@ MigrationBackup/
 .DS_Store
 
 src/.vscode/
+
+src/Cactus.ferate/Properties/ServiceDependencies/cactus-ferate - Web Deploy/
+
+src/Cactus.ferate/Properties/ServiceDependencies/cactus-ferate - Web Deploy1/
