@@ -13,7 +13,7 @@ type Ferate = {
 }
 
 module Ferate =
-  let now () = DateOnly.FromDateTime DateTime.Now
+  let today () = DateOnly.FromDateTime DateTime.Now
 
   [<Literal>]
   let private ep = "https://www.mizuhobank.co.jp/market/csv/quote.csv"
@@ -36,7 +36,7 @@ module Ferate =
 
   let private fetch'historical'data () = 
     lock monitor (fun () ->
-      if last_updated < now() then
+      if last_updated < today() then
         task { 
           let! r = client.GetAsync ep
           use! s = r.Content.ReadAsStreamAsync()
@@ -56,11 +56,11 @@ module Ferate =
                 | e -> System.Diagnostics.Debug.WriteLine $"### {e.Message}"; { DATE = None; USD = None; GBP = None } )
         }
         |> Task.WaitAll
-        last_updated <- now()
+        last_updated <- today()
       historical_data
     )
   
   let get'historical'data () =
-    if last_updated < now() 
+    if last_updated < today() 
     then fetch'historical'data()
     else historical_data
