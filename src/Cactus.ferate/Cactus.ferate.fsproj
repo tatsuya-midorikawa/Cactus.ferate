@@ -5,7 +5,7 @@
   <ItemGroup>
     <Compile Include="Core/Ferate.fs" />
     <Compile Include="WeatherForecast.fs" />
-    <Compile Include="Controllers/Ferate.fs" />
+    <Compile Include="Controllers/HistoryController.fs" />
     <Compile Include="Controllers/WeatherForecastController.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

@@ -10,10 +10,10 @@ open Cactus.ferate
 
 [<ApiController>]
 [<Route("[controller]")>]
-type FerateController (logger : ILogger<_>) =
+type HistoryController (logger : ILogger<_>) =
   inherit ControllerBase()
 
   [<HttpGet>]
   member _.Get() =
-    let csv = Ferate.fetch'historical'data()
+    let csv = Ferate.get'historical'data ()
     csv
