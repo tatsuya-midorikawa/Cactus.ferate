@@ -53,7 +53,7 @@ module Ferate =
             |> Array.map (fun d ->
               let xs = d.Split ','
               try
-                { DATE = date'parse xs[0]; USD = decimal'parse xs[idx["USD"]]; GBP = decimal'parse xs[idx["GBP"]]; EUR = decimal'parse xs[idx["EUR"]] }
+                { DATE = date'parse xs[idx["DATE"]]; USD = decimal'parse xs[idx["USD"]]; GBP = decimal'parse xs[idx["GBP"]]; EUR = decimal'parse xs[idx["EUR"]] }
               with 
                 | e -> 
                   System.Diagnostics.Debug.WriteLine $"### {e.Message}"
