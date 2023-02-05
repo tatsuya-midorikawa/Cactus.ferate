@@ -5,11 +5,13 @@ open System.Net.Http
 open System.Threading.Tasks
 open System.Text
 open System.IO
+open System.Text.Json.Serialization
 
 type Ferate = {
-  DATE: DateOnly option
-  USD: decimal option
-  GBP: decimal option
+  [<JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)>] DATE: DateOnly option
+  [<JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)>] USD: decimal option
+  [<JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)>] GBP: decimal option
+  [<JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)>] EUR: decimal option
 }
 
 module Ferate =
@@ -51,9 +53,11 @@ module Ferate =
             |> Array.map (fun d ->
               let xs = d.Split ','
               try
-                { DATE = date'parse xs[0]; USD = decimal'parse xs[1]; GBP = decimal'parse xs[2] }
+                { DATE = date'parse xs[0]; USD = decimal'parse xs[idx["USD"]]; GBP = decimal'parse xs[idx["GBP"]]; EUR = decimal'parse xs[idx["EUR"]] }
               with 
-                | e -> System.Diagnostics.Debug.WriteLine $"### {e.Message}"; { DATE = None; USD = None; GBP = None } )
+                | e -> 
+                  System.Diagnostics.Debug.WriteLine $"### {e.Message}"
+                  { DATE = None; USD = None; GBP = None; EUR = None; } )
         }
         |> Task.WaitAll
         last_updated <- today()
